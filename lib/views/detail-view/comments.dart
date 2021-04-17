@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:help_together/services/post_service.dart';
 import 'package:help_together/widgets/app_comment_card.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
+import 'package:help_together/core/string_extensions.dart';
 
 class Comments extends StatefulWidget {
   final String id;
@@ -140,7 +142,7 @@ class _CommentsState extends State<Comments> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ListTile(
-              title: Text(widget.title,
+              title: Text((widget.title as String).capitalize,
                   style: Theme.of(context)
                       .textTheme
                       .headline4
@@ -148,10 +150,24 @@ class _CommentsState extends State<Comments> {
             ),
             SizedBox(height: 20),
             Expanded(
-              child: ListView.separated(
-                  itemCount: 20,
-                  separatorBuilder: (_, __) => SizedBox(height: 10),
-                  itemBuilder: (_, __) => AppCommentCard()),
+              child: StreamBuilder<QuerySnapshot>(
+                  stream: postService.comments
+                      .where('id', isEqualTo: widget.id)
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return ListView.separated(
+                          itemCount: snapshot.data.docs.length,
+                          separatorBuilder: (_, __) => SizedBox(height: 10),
+                          itemBuilder: (_, index) => AppCommentCard(
+                                comment: snapshot.data.docs[index],
+                              ));
+                    } else {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  }),
             )
           ],
         ),

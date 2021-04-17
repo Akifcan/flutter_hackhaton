@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:help_together/widgets/app_post_icon.dart';
+import 'package:help_together/core/string_extensions.dart';
 
 class AppPostCard extends StatelessWidget {
   final DocumentSnapshot data;
@@ -31,7 +32,9 @@ class AppPostCard extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(18.0),
                   child: Text(
-                      this.data['content']['title'] + ' ' + this.data['type'],
+                      (this.data['content']['title'] as String).capitalize +
+                          ' ' +
+                          this.data['type'],
                       style: Theme.of(context)
                           .textTheme
                           .headline4
@@ -43,11 +46,10 @@ class AppPostCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(18.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 AppPostIcon(icon: Icons.chevron_right, detail: this.data),
-                AppPostIcon(icon: FontAwesomeIcons.paw),
-                AppPostIcon(icon: Icons.save)
+                AppPostIcon(icon: Icons.favorite)
               ],
             ),
           )

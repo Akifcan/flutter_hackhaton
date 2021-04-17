@@ -21,8 +21,8 @@ post detail [ x ]
 ---
 
 create comment [ x ]
-list comments [ ]
-refactoring [ ]
+list comments [ x ]
+refactoring [ x ]
 
 ---
 

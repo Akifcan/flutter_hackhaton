@@ -49,9 +49,9 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
 
     Future.microtask(() async {
       final user = FirebaseAuth.instance.currentUser;
-      // if (user != null) {
-      //   Navigator.of(context).pushNamed('/home');
-      // }
+      if (user != null) {
+        Navigator.of(context).pushNamed('/home');
+      }
     });
   }
 
@@ -88,7 +88,7 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
             ),
             Opacity(
               opacity: pawOpacity.value,
-              child: Text('KAHRAMANIM',
+              child: Text('El Ele',
                   style: Theme.of(context).textTheme.headline3.copyWith(
                       color: Colors.white, fontWeight: FontWeight.bold)),
             ),

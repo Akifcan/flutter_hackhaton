@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppDetailCard extends StatelessWidget {
-  final String text;
+  final Widget text;
   const AppDetailCard({Key key, this.text}) : super(key: key);
 
   @override
@@ -13,11 +13,8 @@ class AppDetailCard extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: 10),
         padding: const EdgeInsets.all(12),
         child: Center(
-            child: Text(this.text,
-                style: Theme.of(context)
-                    .textTheme
-                    .headline5
-                    .copyWith(color: Colors.white))),
+          child: this.text,
+        ),
       ),
     );
   }

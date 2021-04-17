@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:help_together/services/user_service.dart';
 import 'package:help_together/views/detail-view/comments.dart';
 import 'package:help_together/widgets/app_avatar.dart';
 import 'package:help_together/widgets/app_detail_button.dart';
 import 'package:help_together/widgets/app_detail_card.dart';
+import 'package:help_together/core/string_extensions.dart';
 
 class Detail extends StatefulWidget {
   final DocumentSnapshot detail;
@@ -73,14 +74,14 @@ class _DetailState extends State<Detail> {
                     avatarUrl: user['avatar'].toString(),
                   ),
                   title: Text(
-                    user['username'].toString(),
+                    user['username'].toString().capitalize,
                     style: Theme.of(context)
                         .textTheme
                         .headline5
                         .copyWith(fontWeight: FontWeight.w300),
                   ),
                   subtitle: Text(
-                    user['city'],
+                    (user['city'] as String).capitalize,
                     style: Theme.of(context)
                         .textTheme
                         .headline6
@@ -92,25 +93,61 @@ class _DetailState extends State<Detail> {
                   Row(
                     children: [
                       AppDetailCard(
-                          text: widget.detail['content']['age'].toString()),
+                        text: Wrap(
+                          alignment: WrapAlignment.center,
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          spacing: 20,
+                          children: [
+                            Text('Yaş:',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline4
+                                    .copyWith(color: Colors.white)),
+                            Text(
+                              widget.detail['content']['age'].toString(),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline5
+                                  .copyWith(color: Colors.white),
+                            )
+                          ],
+                        ),
+                      ),
                       AppDetailCard(
-                          text: widget.detail['content']['gender'].toString() ==
-                                  'male'
-                              ? 'Erkek'
-                              : 'Dişi'),
+                          text: Wrap(
+                        alignment: WrapAlignment.center,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        spacing: 20,
+                        children: [
+                          Icon(FontAwesomeIcons.venusMars,
+                              size: 40, color: Colors.white),
+                          Text(
+                            widget.detail['content']['gender'].toString() ==
+                                    'male'
+                                ? 'Erkek'
+                                : 'Dişi',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline5
+                                .copyWith(color: Colors.white),
+                          )
+                        ],
+                      )),
                     ],
                   ),
                 SizedBox(height: 20),
-                Text(widget.detail['content']['title'],
+                Text((widget.detail['content']['title'] as String).capitalize,
                     style: Theme.of(context)
                         .textTheme
                         .headline3
                         .copyWith(color: Colors.black)),
-                Text(widget.detail['content']['description'],
+                Text(
+                    (widget.detail['content']['description'] as String)
+                        .capitalize,
                     textAlign: TextAlign.justify,
                     style: Theme.of(context)
                         .textTheme
-                        .headline5
+                        .subtitle1
                         .copyWith(color: Colors.black)),
                 SizedBox(height: 20),
                 Row(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:help_together/core/storage.dart';
+import 'package:help_together/core/string_extensions.dart';
 
 class LocationCard extends StatelessWidget {
   const LocationCard({Key key}) : super(key: key);
@@ -14,9 +15,9 @@ class LocationCard extends StatelessWidget {
           icon: Icon(Icons.location_on, color: Theme.of(context).primaryColor),
           onPressed: () {},
         ),
-        title: Text('Location'),
+        title: Text('Konum'),
         subtitle: Text(
-          Storage.getString('location'),
+          (Storage.getString('location') as String).capitalize,
           style: Theme.of(context)
               .textTheme
               .headline5

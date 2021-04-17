@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:help_together/core/storage.dart';
 import 'package:help_together/widgets/app_avatar.dart';
+import 'package:help_together/core/string_extensions.dart';
 
 class AppHeader extends StatelessWidget {
   @override
@@ -32,7 +33,7 @@ class AppHeader extends StatelessWidget {
                               FirebaseAuth.instance.currentUser.photoURL))
                 ],
               ),
-              Text(Storage.getString('location'),
+              Text((Storage.getString('location') as String).capitalize,
                   style: Theme.of(context)
                       .textTheme
                       .headline6

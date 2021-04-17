@@ -12,18 +12,13 @@ class CategoryModel {
 
 List<CategoryModel> categories = [
   CategoryModel(
-      type: 'donate',
-      categoryName: 'Bağış Yap',
-      to: '',
-      linearGradient: gradients[0]),
+      type: 'all', categoryName: 'Tümü', to: '', linearGradient: gradients[1]),
+  CategoryModel(
+      type: 'donate', categoryName: 'Bağış Yap', linearGradient: gradients[0]),
   CategoryModel(
       type: 'volunteer',
       categoryName: 'Gönüllü Ol',
-      to: '',
       linearGradient: gradients[1]),
   CategoryModel(
-      type: 'pet',
-      categoryName: 'İhtiyaçlar',
-      to: '',
-      linearGradient: gradients[2]),
+      type: 'pet', categoryName: 'İhtiyaçlar', linearGradient: gradients[2]),
 ];

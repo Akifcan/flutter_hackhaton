@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:help_together/core/storage.dart';
 import 'package:help_together/models/category_model.dart';
 import 'package:help_together/services/post_service.dart';
 import 'package:help_together/widgets/app_category_card.dart';
@@ -21,9 +22,13 @@ class _HomeState extends State<Home> {
 
   listByCategory(String categoryName) {
     setState(() {
-      posts = corePosts
-          .where((element) => element['type'] == categoryName)
-          .toList();
+      if (categoryName == 'all') {
+        posts = corePosts;
+      } else {
+        posts = corePosts
+            .where((element) => element['type'] == categoryName)
+            .toList();
+      }
     });
   }
 
@@ -31,8 +36,10 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     Future.microtask(() async {
-      final postList =
-          await postService.posts.orderBy('time', descending: false).get();
+      final postList = await postService.posts
+          .orderBy('time', descending: false)
+          .where('province', isEqualTo: Storage.getString('location'))
+          .get();
       setState(() {
         posts = postList.docs;
         corePosts = postList.docs;
@@ -44,22 +51,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: Container(
-        height: 80,
-        child: FloatingActionButton(
-          elevation: 25,
-          onPressed: () => Navigator.of(context).pushNamed('/create-post'),
-          backgroundColor: Colors.deepOrange,
-          child: Wrap(
-            children: [
-              Icon(
-                Icons.add,
-                size: 40,
-              )
-            ],
-          ),
-        ),
-      ),
+      floatingActionButton: _fab,
       body: Column(
         children: [
           AppHeader(),
@@ -107,6 +99,20 @@ class _HomeState extends State<Home> {
             category: categories[index],
             voidCallback: () => listByCategory(categories[index].type),
           ),
+        ),
+      );
+
+  Widget get _fab => FloatingActionButton(
+        elevation: 5,
+        onPressed: () => Navigator.of(context).pushNamed('/create-post'),
+        backgroundColor: Colors.indigo,
+        child: Wrap(
+          children: [
+            Icon(
+              Icons.add,
+              size: 40,
+            )
+          ],
         ),
       );
 }
