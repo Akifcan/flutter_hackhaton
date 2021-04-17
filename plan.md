@@ -1,3 +1,5 @@
 home [ x ]
 detail [ x ]
-comments [ ]
+comments [ x ]
+create comment [ x ]
+sign in [ x ]

@@ -88,7 +88,7 @@ class _DetailState extends State<Detail> {
                     SizedBox(width: 20),
                     AppDetailButton(
                       icon: Icons.comment,
-                      text: 'Yorum Yap',
+                      text: 'Yorumlar',
                       color: Colors.red[900],
                     ),
                   ],
