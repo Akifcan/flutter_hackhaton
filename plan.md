@@ -4,20 +4,29 @@ comments [ x ]
 create comment [ x ]
 sign in [ x ]
 
+---
+
 google sign in [ x ]
 choose location [ x ]
 show user info [ x ]
 create post ui [ x ]
-save to firebase [ ]
+save to firebase [ x ]
 
-last posts [ ]
-list by category [ ]
-post detail [ ]
-post comments [ ]
-create comment [ ]
+---
+
+last posts [ x ]
+list by category [ x ]
+post detail [ x ]
+
+---
+
+create comment [ x ]
 list comments [ ]
+refactoring [ ]
+
+---
 
 user profile [ ]
 delete comment [ ]
-user settings [ ]
+favorites [ ]
 logout [ ]

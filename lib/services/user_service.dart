@@ -15,11 +15,12 @@ class UserService {
       FirebaseFirestore.instance.collection(_COLLECTION_NAME);
 
   signIn(UserCredential user, String city) async {
-    await users.add({
+    final result = await users.add({
       "username": user.user.displayName,
       "avatar": user.user.photoURL,
       "city": city
     });
+    Storage.saveString('userid', result.id);
     Storage.saveString('location', city.toLowerCase());
   }
 }

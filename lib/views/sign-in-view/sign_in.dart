@@ -49,9 +49,9 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
 
     Future.microtask(() async {
       final user = FirebaseAuth.instance.currentUser;
-      if (user != null) {
-        Navigator.of(context).pushNamed('/home');
-      }
+      // if (user != null) {
+      //   Navigator.of(context).pushNamed('/home');
+      // }
     });
   }
 
@@ -75,8 +75,16 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
               offset: Offset(0, pawUp.value),
               child: Transform.scale(
                   scale: pawIn.value,
-                  child: Icon(FontAwesomeIcons.paw,
-                      size: 70, color: Colors.white)),
+                  child: Wrap(
+                    spacing: 30,
+                    children: [
+                      Icon(FontAwesomeIcons.paw, size: 70, color: Colors.white),
+                      Icon(FontAwesomeIcons.handHolding,
+                          size: 70, color: Colors.white),
+                      Icon(FontAwesomeIcons.peopleArrows,
+                          size: 70, color: Colors.white),
+                    ],
+                  )),
             ),
             Opacity(
               opacity: pawOpacity.value,
@@ -84,22 +92,25 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
                   style: Theme.of(context).textTheme.headline3.copyWith(
                       color: Colors.white, fontWeight: FontWeight.bold)),
             ),
-            Opacity(
-              opacity: pawOpacity.value,
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      elevation: 5,
-                      primary: Colors.white,
-                      padding: const EdgeInsets.all(20)),
-                  child: Text('Google ile Giriş Yap',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline5
-                          .copyWith(color: Colors.black)),
-                  onPressed: () {
-                    print('click');
-                    signIn();
-                  }),
+            Transform.translate(
+              offset: Offset(0, buttonDown.value),
+              child: Opacity(
+                opacity: pawOpacity.value,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        elevation: 5,
+                        primary: Colors.white,
+                        padding: const EdgeInsets.all(20)),
+                    child: Text('Google ile Giriş Yap',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline5
+                            .copyWith(color: Colors.black)),
+                    onPressed: () {
+                      print('click');
+                      signIn();
+                    }),
+              ),
             )
           ],
         );

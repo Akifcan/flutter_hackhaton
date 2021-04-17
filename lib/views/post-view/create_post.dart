@@ -52,7 +52,12 @@ class _CreatePostState extends State<CreatePost> {
         petForm.currentState.save();
         postService.createPost(
             images,
-            {"title": title, "description": description, "gender": gender},
+            {
+              "title": title,
+              "description": description,
+              "gender": gender,
+              "age": age
+            },
             type);
       }
     }
@@ -66,7 +71,8 @@ class _CreatePostState extends State<CreatePost> {
     if (type == 'donate') {
       if (donateForm.currentState.validate()) {
         donateForm.currentState.save();
-        postService.createPost(images, {"title": title, "goal": goal}, type);
+        postService.createPost(images,
+            {"title": title, "goal": goal, "description": description}, type);
       }
     }
   }

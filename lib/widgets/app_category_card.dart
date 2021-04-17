@@ -3,13 +3,15 @@ import 'package:help_together/models/category_model.dart';
 
 class AppCategoryCard extends StatelessWidget {
   final CategoryModel category;
+  final VoidCallback voidCallback;
 
-  const AppCategoryCard({Key key, this.category}) : super(key: key);
+  const AppCategoryCard({Key key, this.category, this.voidCallback})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: this.voidCallback,
       child: Container(
         decoration: BoxDecoration(
             gradient: this.category.linearGradient,

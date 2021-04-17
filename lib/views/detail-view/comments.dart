@@ -1,63 +1,127 @@
 import 'package:flutter/material.dart';
+import 'package:help_together/services/post_service.dart';
 import 'package:help_together/widgets/app_comment_card.dart';
-import 'package:help_together/widgets/app_comment_header.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 
 class Comments extends StatefulWidget {
-  Comments({Key key}) : super(key: key);
+  final String id;
+  final String title;
+  Comments({Key key, this.id, this.title}) : super(key: key);
 
   @override
   _CommentsState createState() => _CommentsState();
 }
 
 class _CommentsState extends State<Comments> {
+  List<Asset> images = [];
+  PostService postService = PostService.instance;
+  final GlobalKey<FormState> key = GlobalKey<FormState>();
+  String comment;
+
+  createComment() async {
+    if (key.currentState.validate()) {
+      key.currentState.save();
+      await postService.createComment(comment, widget.id, images);
+      print('ok');
+    }
+  }
+
+  chooseImages(state) async {
+    List<Asset> resultList;
+    try {
+      resultList = await MultiImagePicker.pickImages(
+        maxImages: 5,
+      );
+    } on Exception catch (e) {
+      print(e);
+    }
+
+    state(() {
+      images = resultList;
+    });
+  }
+
+  removeImage(int index, state) {
+    state(() {
+      images.removeAt(index);
+    });
+  }
+
   showCommentDialog() {
     showModalBottomSheet(
         context: context,
-        builder: (_) => Container(
-              color: Color(0xffdedede),
-              height: MediaQuery.of(context).size.height * 0.7,
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 18.0, vertical: 30),
-                child: Center(
-                  child: Column(
-                    children: [
-                      AppCommentHeader(),
-                      SizedBox(height: 10),
-                      Form(
-                        child: TextFormField(
-                          maxLines: 3,
-                          decoration: InputDecoration(
-                              suffixIcon: Wrap(
-                                children: [
-                                  IconButton(
-                                    tooltip: 'Resim Yükle',
-                                    icon: Icon(Icons.camera),
-                                    onPressed: () {},
-                                  ),
-                                  IconButton(
-                                    tooltip: 'Paylaş',
-                                    icon: Icon(Icons.chevron_right),
-                                    onPressed: () {},
-                                  ),
-                                ],
+        builder: (_) => StatefulBuilder(
+            builder: (context, setState) => SingleChildScrollView(
+                  child: Container(
+                    color: Color(0xffdedede),
+                    height: MediaQuery.of(context).size.height * 0.7,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                      child: Center(
+                        child: Form(
+                          key: key,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextFormField(
+                                onSaved: (val) => setState(() => comment = val),
+                                validator: (val) {
+                                  if (val.length > 250) {
+                                    return "Yorumunuz çok uzun";
+                                  }
+                                  if (val.length < 5) {
+                                    return "Yorumunuz çok kısa";
+                                  }
+                                  return null;
+                                },
+                                decoration: InputDecoration(
+                                    suffixIcon: Wrap(
+                                      children: [
+                                        IconButton(
+                                            color: Colors.black,
+                                            icon: Icon(Icons.camera),
+                                            onPressed: () {
+                                              chooseImages(setState);
+                                            }),
+                                        IconButton(
+                                          color: Colors.black,
+                                          icon: Icon(Icons.chevron_right),
+                                          onPressed: createComment,
+                                        ),
+                                      ],
+                                    ),
+                                    hintText: 'Yorumunuz'),
                               ),
-                              filled: true),
+                              SizedBox(height: 50),
+                              Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.1,
+                                child: images.length > 0
+                                    ? ListView.separated(
+                                        scrollDirection: Axis.horizontal,
+                                        separatorBuilder: (_, __) =>
+                                            SizedBox(width: 10),
+                                        itemCount: images.length,
+                                        itemBuilder: (_, index) =>
+                                            GestureDetector(
+                                              onLongPress: () =>
+                                                  removeImage(index, setState),
+                                              child: AssetThumb(
+                                                  asset: images[index],
+                                                  height: 50,
+                                                  width: 50),
+                                            ))
+                                    : SizedBox(
+                                        height: 250,
+                                      ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
-                      Container(
-                          height: MediaQuery.of(context).size.height * 0.1,
-                          child: ListView.separated(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: 5,
-                              separatorBuilder: (_, __) => SizedBox(width: 5),
-                              itemBuilder: (_, __) => Image.network(
-                                  'https://placekitten.com/96/140')))
-                    ],
+                    ),
                   ),
-                ),
-              ),
-            ));
+                )));
   }
 
   @override
@@ -66,7 +130,7 @@ class _CommentsState extends State<Comments> {
       backgroundColor: Color(0xffdedede),
       floatingActionButton: FloatingActionButton.extended(
         label: Text('Yorum Yap'),
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Colors.deepOrange,
         icon: Icon(Icons.comment),
         onPressed: showCommentDialog,
       ),
@@ -75,7 +139,13 @@ class _CommentsState extends State<Comments> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppCommentHeader(),
+            ListTile(
+              title: Text(widget.title,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline4
+                      .copyWith(color: Colors.black)),
+            ),
             SizedBox(height: 20),
             Expanded(
               child: ListView.separated(

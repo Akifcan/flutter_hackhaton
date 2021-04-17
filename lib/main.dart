@@ -11,6 +11,7 @@ void main() async {
   await Firebase.initializeApp();
   await Storage.initialStorage();
   print(Storage.getString('location'));
+  // Storage.saveString('userid', 'zRLfMR7PeLhgT3JyXQ9W');
   runApp(MyApp());
 }
 

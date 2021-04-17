@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:help_together/models/category_model.dart';
+import 'package:help_together/services/post_service.dart';
 import 'package:help_together/widgets/app_category_card.dart';
 import 'package:help_together/widgets/app_header.dart';
 import 'package:help_together/widgets/app_post_card.dart';
@@ -13,13 +15,50 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  List<QueryDocumentSnapshot> posts;
+  List<QueryDocumentSnapshot> corePosts;
+  final PostService postService = PostService.instance;
+
+  listByCategory(String categoryName) {
+    setState(() {
+      posts = corePosts
+          .where((element) => element['type'] == categoryName)
+          .toList();
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() async {
+      final postList =
+          await postService.posts.orderBy('time', descending: false).get();
+      setState(() {
+        posts = postList.docs;
+        corePosts = postList.docs;
+      });
+      print(posts);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.of(context).pushNamed('/create-post'),
-        backgroundColor: Colors.deepOrange,
-        child: Icon(Icons.add),
+      floatingActionButton: Container(
+        height: 80,
+        child: FloatingActionButton(
+          elevation: 25,
+          onPressed: () => Navigator.of(context).pushNamed('/create-post'),
+          backgroundColor: Colors.deepOrange,
+          child: Wrap(
+            children: [
+              Icon(
+                Icons.add,
+                size: 40,
+              )
+            ],
+          ),
+        ),
       ),
       body: Column(
         children: [
@@ -45,11 +84,14 @@ class _HomeState extends State<Home> {
               _categories,
               SizedBox(height: 20),
               Expanded(
-                child: ListView.separated(
-                    separatorBuilder: (_, __) => SizedBox(height: 10),
-                    itemCount: 10,
-                    itemBuilder: (_, __) => AppPostCard()),
-              )
+                  child: posts != null
+                      ? ListView.separated(
+                          separatorBuilder: (_, __) => SizedBox(height: 10),
+                          itemCount: posts.length,
+                          itemBuilder: (_, index) => AppPostCard(
+                                data: posts[index],
+                              ))
+                      : Center(child: CircularProgressIndicator()))
             ],
           ),
         ),
@@ -61,8 +103,10 @@ class _HomeState extends State<Home> {
           separatorBuilder: (_, __) => SizedBox(width: 20),
           itemCount: categories.length,
           scrollDirection: Axis.horizontal,
-          itemBuilder: (_, index) =>
-              AppCategoryCard(category: categories[index]),
+          itemBuilder: (_, index) => AppCategoryCard(
+            category: categories[index],
+            voidCallback: () => listByCategory(categories[index].type),
+          ),
         ),
       );
 }
