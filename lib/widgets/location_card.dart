@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:help_together/core/storage.dart';
 
 class LocationCard extends StatelessWidget {
   const LocationCard({Key key}) : super(key: key);
@@ -15,7 +16,7 @@ class LocationCard extends StatelessWidget {
         ),
         title: Text('Location'),
         subtitle: Text(
-          'izmir',
+          Storage.getString('location'),
           style: Theme.of(context)
               .textTheme
               .headline5

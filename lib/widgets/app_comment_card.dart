@@ -13,7 +13,9 @@ class AppCommentCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           border: Border.all(color: Theme.of(context).primaryColor, width: 2)),
       child: ListTile(
-        leading: AppAvatar(),
+        leading: AppAvatar(
+          avatarUrl: '',
+        ),
         title: Text(
           'username',
           style: Theme.of(context)

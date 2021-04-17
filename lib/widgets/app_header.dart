@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:help_together/core/storage.dart';
 import 'package:help_together/widgets/app_avatar.dart';
 
 class AppHeader extends StatelessWidget {
@@ -19,14 +21,18 @@ class AppHeader extends StatelessWidget {
                 children: [
                   Transform.translate(
                     offset: Offset(0, 10),
-                    child: Text('John Doe',
+                    child: Text(FirebaseAuth.instance.currentUser.displayName,
                         style: Theme.of(context).textTheme.headline5.copyWith(
                             fontWeight: FontWeight.w900, color: Colors.white)),
                   ),
-                  Transform.translate(offset: Offset(0, 10), child: AppAvatar())
+                  Transform.translate(
+                      offset: Offset(0, 10),
+                      child: AppAvatar(
+                          avatarUrl:
+                              FirebaseAuth.instance.currentUser.photoURL))
                 ],
               ),
-              Text('Volunteer',
+              Text(Storage.getString('location'),
                   style: Theme.of(context)
                       .textTheme
                       .headline6

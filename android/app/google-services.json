@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "141168434498",
+    "project_id": "flutter-hackhaton",
+    "storage_bucket": "flutter-hackhaton.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:141168434498:android:6bdffe117fe55798243cdb",
+        "android_client_info": {
+          "package_name": "com.help_together.help_together"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "141168434498-dthhcd1vgl7umpb8q8amkbh42b989h45.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.help_together.help_together",
+            "certificate_hash": "ce87c034b11a384c8f9d1bf411c7a1214bd10a6e"
+          }
+        },
+        {
+          "client_id": "141168434498-j2f9mj8lnes95sdblqna9c8bktk2s944.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDr_lj2goWn09uW_8ADk3RRwjr0x2T5AJ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "141168434498-j2f9mj8lnes95sdblqna9c8bktk2s944.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

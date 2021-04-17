@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:help_together/widgets/app_avatar.dart';
 import 'package:help_together/widgets/app_detail_button.dart';
@@ -49,7 +50,9 @@ class _DetailState extends State<Detail> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ListTile(
-                  leading: AppAvatar(),
+                  leading: AppAvatar(
+                    avatarUrl: FirebaseAuth.instance.currentUser.photoURL,
+                  ),
                   title: Text(
                     'username',
                     style: Theme.of(context)

@@ -16,6 +16,11 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.of(context).pushNamed('/create-post'),
+        backgroundColor: Colors.deepOrange,
+        child: Icon(Icons.add),
+      ),
       body: Column(
         children: [
           AppHeader(),

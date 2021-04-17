@@ -1,5 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geocoder/geocoder.dart';
+import 'package:help_together/core/utils.dart';
+import 'package:help_together/services/user_service.dart';
+import 'package:location/location.dart';
 
 class SignIn extends StatefulWidget {
   SignIn({Key key}) : super(key: key);
@@ -9,11 +14,23 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> with TickerProviderStateMixin {
+  UserService userService = UserService.instance;
   AnimationController animationController;
   Animation<double> pawIn;
   Animation<double> pawUp;
   Animation<double> pawOpacity;
   Animation<double> buttonDown;
+
+  signIn() async {
+    final result = await getLocation();
+    if (result is LocationData) {
+      final user = await signInWithGoogle();
+      final addresses = await Geocoder.local.findAddressesFromCoordinates(
+          Coordinates(result.latitude, result.longitude));
+      await userService.signIn(user, addresses[0].adminArea);
+      Navigator.of(context).pushNamed('/home');
+    }
+  }
 
   @override
   initState() {
@@ -29,6 +46,13 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
     buttonDown = Tween<double>(begin: 0, end: 60).animate(CurvedAnimation(
         parent: animationController, curve: Interval(0.35, 0.55)));
     animationController.forward();
+
+    Future.microtask(() async {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        Navigator.of(context).pushNamed('/home');
+      }
+    });
   }
 
   @override
@@ -62,9 +86,7 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
             ),
             Opacity(
               opacity: pawOpacity.value,
-              child: Transform.translate(
-                offset: Offset(0, buttonDown.value),
-                child: ElevatedButton(
+              child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       elevation: 5,
                       primary: Colors.white,
@@ -74,9 +96,10 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
                           .textTheme
                           .headline5
                           .copyWith(color: Colors.black)),
-                  onPressed: () {},
-                ),
-              ),
+                  onPressed: () {
+                    print('click');
+                    signIn();
+                  }),
             )
           ],
         );
