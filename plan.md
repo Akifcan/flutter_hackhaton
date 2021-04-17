@@ -26,7 +26,14 @@ refactoring [ x ]
 
 ---
 
-user profile [ ]
-delete comment [ ]
+change city [ x ]
+user profile [ x ]
+delete comment [ x ]
+donate page [ ]
+donate limit [ ]
 favorites [ ]
 logout [ ]
+
+---
+
+last test [ ]

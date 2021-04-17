@@ -26,7 +26,7 @@ class LocationCard extends StatelessWidget {
         trailing: IconButton(
           icon:
               Icon(Icons.change_history, color: Theme.of(context).primaryColor),
-          onPressed: () {},
+          onPressed: () => Navigator.of(context).pushNamed('/change-city'),
         ),
       ),
     );

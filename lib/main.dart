@@ -2,8 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:help_together/core/storage.dart';
 import 'package:help_together/theme/custom_theme.dart';
+import 'package:help_together/views/change-city-view/change_city.dart';
 import 'package:help_together/views/home-view/home.dart';
 import 'package:help_together/views/post-view/create_post.dart';
+import 'package:help_together/views/profile-view/profile.dart';
 import 'package:help_together/views/sign-in-view/sign_in.dart';
 
 void main() async {
@@ -23,7 +25,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: themeData,
       home: SignIn(),
-      routes: {'/home': (_) => Home(), '/create-post': (_) => CreatePost()},
+      routes: {
+        '/home': (_) => Home(),
+        '/create-post': (_) => CreatePost(),
+        '/change-city': (_) => ChangeCity(),
+        '/profile': (_) => Profile()
+      },
     );
   }
 }

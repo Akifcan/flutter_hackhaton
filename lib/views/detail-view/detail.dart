@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:help_together/dto/profile.dto.dart';
 import 'package:help_together/services/user_service.dart';
 import 'package:help_together/views/detail-view/comments.dart';
 import 'package:help_together/widgets/app_avatar.dart';
@@ -70,6 +71,8 @@ class _DetailState extends State<Detail> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ListTile(
+                  onTap: () => Navigator.of(context).pushNamed('/profile',
+                      arguments: ProfileDto(id: widget.detail['userId'])),
                   leading: AppAvatar(
                     avatarUrl: user['avatar'].toString(),
                   ),

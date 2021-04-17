@@ -82,4 +82,12 @@ class PostService {
     }
     return downloadUrls;
   }
+
+  deleteComment(String id) {
+    comments.doc(id).delete();
+  }
+
+  deletePost(String id) {
+    posts.doc(id).delete();
+  }
 }

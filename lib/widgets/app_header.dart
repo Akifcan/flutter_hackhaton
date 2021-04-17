@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:help_together/core/storage.dart';
+import 'package:help_together/dto/profile.dto.dart';
 import 'package:help_together/widgets/app_avatar.dart';
 import 'package:help_together/core/string_extensions.dart';
 
@@ -26,11 +27,15 @@ class AppHeader extends StatelessWidget {
                         style: Theme.of(context).textTheme.headline5.copyWith(
                             fontWeight: FontWeight.w900, color: Colors.white)),
                   ),
-                  Transform.translate(
-                      offset: Offset(0, 10),
-                      child: AppAvatar(
-                          avatarUrl:
-                              FirebaseAuth.instance.currentUser.photoURL))
+                  GestureDetector(
+                    onTap: () => Navigator.of(context).pushNamed('/profile',
+                        arguments: ProfileDto(id: Storage.getString('userid'))),
+                    child: Transform.translate(
+                        offset: Offset(0, 10),
+                        child: AppAvatar(
+                            avatarUrl:
+                                FirebaseAuth.instance.currentUser.photoURL)),
+                  )
                 ],
               ),
               Text((Storage.getString('location') as String).capitalize,

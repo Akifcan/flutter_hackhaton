@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 
 ThemeData themeData = ThemeData(
     iconTheme: IconThemeData(color: Colors.deepOrange),
+    appBarTheme: AppBarTheme(centerTitle: true),
     inputDecorationTheme: InputDecorationTheme(filled: true),
     floatingActionButtonTheme:
         FloatingActionButtonThemeData(backgroundColor: Colors.deepOrange),
     textTheme: TextTheme(subtitle1: TextStyle(fontSize: 22)),
     primaryColor: Color(0xffdedede),
-    scaffoldBackgroundColor: Colors.deepOrange);
+    scaffoldBackgroundColor: Color(0xffdedede));
 
 List<LinearGradient> gradients = [
   LinearGradient(
