@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:help_together/widgets/app_avatar.dart';
 
 class AppHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: 1,
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.2,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
         child: Container(
@@ -22,14 +23,7 @@ class AppHeader extends StatelessWidget {
                         style: Theme.of(context).textTheme.headline5.copyWith(
                             fontWeight: FontWeight.w900, color: Colors.white)),
                   ),
-                  Transform.translate(
-                    offset: Offset(0, 10),
-                    child: CircleAvatar(
-                      radius: 25,
-                      backgroundImage: NetworkImage(
-                          'https://uifaces.co/our-content/donated/gPZwCbdS.jpg'),
-                    ),
-                  )
+                  Transform.translate(offset: Offset(0, 10), child: AppAvatar())
                 ],
               ),
               Text('Volunteer',

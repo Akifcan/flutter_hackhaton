@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:help_together/models/category_model.dart';
 import 'package:help_together/widgets/app_category_card.dart';
 import 'package:help_together/widgets/app_header.dart';
+import 'package:help_together/widgets/app_post_card.dart';
 import 'package:help_together/widgets/location_card.dart';
 
 class Home extends StatefulWidget {
@@ -39,57 +40,11 @@ class _HomeState extends State<Home> {
               _categories,
               SizedBox(height: 20),
               Expanded(
-                  flex: 1,
-                  child: ListView.separated(
-                      separatorBuilder: (_, __) => SizedBox(height: 10),
-                      itemCount: 10,
-                      itemBuilder: (_, __) => Container(
-                            decoration: BoxDecoration(
-                                color: Colors.deepOrange,
-                                borderRadius: BorderRadius.circular(20)),
-                            height: MediaQuery.of(context).size.height * 0.4,
-                            width: MediaQuery.of(context).size.width,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                    child: Stack(
-                                  children: [
-                                    Image.network(
-                                      'https://placekitten.com/408/287',
-                                      fit: BoxFit.cover,
-                                    )
-                                  ],
-                                )),
-                                Padding(
-                                  padding: const EdgeInsets.all(18.0),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      IconButton(
-                                        color: Colors.white,
-                                        iconSize: 35,
-                                        icon: Icon(Icons.favorite),
-                                        onPressed: () {},
-                                      ),
-                                      IconButton(
-                                        color: Colors.white,
-                                        iconSize: 35,
-                                        icon: Icon(Icons.favorite),
-                                        onPressed: () {},
-                                      ),
-                                      IconButton(
-                                        color: Colors.white,
-                                        iconSize: 35,
-                                        icon: Icon(Icons.favorite),
-                                        onPressed: () {},
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          )))
+                child: ListView.separated(
+                    separatorBuilder: (_, __) => SizedBox(height: 10),
+                    itemCount: 10,
+                    itemBuilder: (_, __) => AppPostCard()),
+              )
             ],
           ),
         ),
