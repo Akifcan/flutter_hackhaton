@@ -37,6 +37,6 @@ Helpy ile el ele:)
 ![12](https://i.imgur.com/NaGw6K0.png)
 
 
-## Flutter Student Club
+## Flutter Students Club
 - Instagram [sayfamız](https://www.instagram.com/flutterstudentsclub/)
 ![fsc](https://cdn.discordapp.com/attachments/830106529813495838/830106798840086558/Calsma_Yuzeyi_2-100.jpg)
