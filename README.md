@@ -1,4 +1,4 @@
-## Flutter Hackhaton Türkiye
+## Flutter Festival Hackhaton Türkiye
 
 ### Helpy Uygulaması
 
