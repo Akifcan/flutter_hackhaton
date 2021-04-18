@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:help_together/dto/donate.dto.dart';
 import 'package:help_together/dto/profile.dto.dart';
 import 'package:help_together/services/user_service.dart';
 import 'package:help_together/views/detail-view/comments.dart';
@@ -8,6 +9,7 @@ import 'package:help_together/widgets/app_avatar.dart';
 import 'package:help_together/widgets/app_detail_button.dart';
 import 'package:help_together/widgets/app_detail_card.dart';
 import 'package:help_together/core/string_extensions.dart';
+import 'package:help_together/widgets/app_donate_info_card.dart';
 
 class Detail extends StatefulWidget {
   final DocumentSnapshot detail;
@@ -139,11 +141,19 @@ class _DetailState extends State<Detail> {
                     ],
                   ),
                 SizedBox(height: 20),
-                Text((widget.detail['content']['title'] as String).capitalize,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline3
-                        .copyWith(color: Colors.black)),
+                if (widget.detail['type'] == 'donate' &&
+                    widget.detail['content']['available'] >=
+                        widget.detail['content']['goal'])
+                  Text((widget.detail['content']['title'] as String).capitalize,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline3
+                          .copyWith(color: Colors.black)),
+                if (widget.detail['type'] == 'donate')
+                  AppDonateInfo(
+                    goal: widget.detail['content']['goal'],
+                    available: widget.detail['content']['available'],
+                  ),
                 Text(
                     (widget.detail['content']['description'] as String)
                         .capitalize,
@@ -155,7 +165,23 @@ class _DetailState extends State<Detail> {
                 SizedBox(height: 20),
                 Row(
                   children: [
-                    AppDetailButton(icon: Icons.map, text: 'Konum'),
+                    if (widget.detail['type'] == 'donate' &&
+                        widget.detail['content']['available'] <
+                            widget.detail['content']['goal'])
+                      AppDetailButton(
+                        icon: Icons.money,
+                        text: 'Bağış Yap',
+                        voidCallback: () =>
+                            Navigator.of(context).pushNamed('/donate',
+                                arguments: DonateDto(
+                                  description: widget.detail['content']
+                                      ['description'],
+                                  title: widget.detail['content']['title'],
+                                  goal: widget.detail['content']['goal'],
+                                )),
+                      ),
+                    if (widget.detail['type'] != 'donate')
+                      AppDetailButton(icon: Icons.map, text: 'Konum'),
                     SizedBox(width: 20),
                     AppDetailButton(
                       voidCallback: () => Navigator.of(context).push(

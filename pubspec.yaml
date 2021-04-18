@@ -37,7 +37,7 @@ dependencies:
   shared_preferences: ^2.0.5
   multi_image_picker: ^4.8.0
   firebase_storage: ^8.0.3
-
+  flutter_credit_card: ^2.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

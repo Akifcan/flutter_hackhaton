@@ -71,8 +71,15 @@ class _CreatePostState extends State<CreatePost> {
     if (type == 'donate') {
       if (donateForm.currentState.validate()) {
         donateForm.currentState.save();
-        postService.createPost(images,
-            {"title": title, "goal": goal, "description": description}, type);
+        postService.createPost(
+            images,
+            {
+              "title": title,
+              "available": 0,
+              "goal": goal,
+              "description": description
+            },
+            type);
       }
     }
   }
