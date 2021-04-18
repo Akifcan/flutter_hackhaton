@@ -39,11 +39,11 @@ Helpy ile el ele:)
 
 ## Flutter Students Club
 - Instagram [sayfamız](https://www.instagram.com/flutterstudentsclub/)
-![fsc](https://cdn.discordapp.com/attachments/830106529813495838/830106798840086558/Calsma_Yuzeyi_2-100.jpg)
+
 
 ## BetaClass.online
 
 - Web [sayfamız](http://www.betaclass.online/)
 
-![logo](https://cdn.discordapp.com/attachments/830106529813495838/830106621371613214/Calsma_Yuzeyi_4.png)
+![fsc](https://cdn.discordapp.com/attachments/830106529813495838/830106798840086558/Calsma_Yuzeyi_2-100.jpg)
 ![logo1](https://cdn.discordapp.com/attachments/830106529813495838/830106600315289640/Beta_Online.online.png)
