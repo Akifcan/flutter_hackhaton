@@ -7,10 +7,11 @@ Helpy: Türkiye'nin yardımsever  uygulaması Helpy ile neler yapabilirsiniz?
 2. Helpy'de paylaşılan gönüllü etkinliklere katılıp sosyal ilişkilerinizi kuvvetlendirebilirsiniz.
 3. Sokak hayvanları veya evcil hayvanların ihtiyaçları doğrultusunda yardım talebi oluşturabilir, bağış kampanyası düzenleyebilirsiniz.
 4. Helpy'de oluşturulan istediğiniz tüm kampanyalara bağış yoluyla veya ihtiyaçları doğrultusunda destek olabilirsiniz.
-
 5. Yardımlaşmak, paylaşmak hiç bu kadar kolay olmamıştı.Konum paylaşma özelliğini kullanarak size en yakın ihtiyaç sahiplerine ulaşabilir
  bu sayede kısa sürede yardım edebilirsiniz.
- Helpy ile el ele:)
+6.İhtiyacınız doğrultusunda ilan oluşturabilir ve ihtiyaç sahiplerine yardımcı olabilirsiniz.
+
+Helpy ile el ele:)
 
 ## FSC Ekibi Hackhaton Uygulaması
 
