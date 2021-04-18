@@ -2,7 +2,7 @@
 
 ### Helpy Uygulaması
 
-Helpy:Türkiye'nin en yardımsever uygulaması
+Helpy: Türkiye'nin yardımsever bir uygulama
 Helpy ile neler yapabilirsiniz?
 1. Herhangi bir konuda sosyal sorumluluk içeren gönüllü etkinlikler oluşturabilirsiniz.
 2. Helpy'de paylaşılan gönüllü etkinliklere katılıp sosyal ilişkilerinizi kuvvetlendirebilirsiniz.
