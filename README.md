@@ -18,7 +18,7 @@ Helpy ile el ele:)
 ## FSC Ekibi Hackhaton Uygulaması
 
 - Ekip Üyeleri
-- Emirhan Özbay [Github profili](https://github.com/emirhanerbay)
+- Emirhan Erbay [Github profili](https://github.com/emirhanerbay)
 - Özlem Soysal [Github Profili](https://github.com/ozlemsoysal)
 - Akifcan Kara [Github Profili](https://github.com/akifcan)
 - Mehmet Ali Gazel [Github Profili](https://github.com/mehmetaligazel)
