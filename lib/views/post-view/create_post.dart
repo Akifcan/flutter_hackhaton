@@ -89,15 +89,20 @@ class _CreatePostState extends State<CreatePost> {
     if (type == 'donate') {
       if (donateForm.currentState.validate()) {
         donateForm.currentState.save();
-        await postService.createPost(
-            images,
-            {
-              "title": title,
-              "available": 0,
-              "goal": goal,
-              "description": description
-            },
-            type);
+        final location = await getLocation();
+        if (location is LocationData) {
+          await postService.createPost(
+              images,
+              {
+                "title": title,
+                "available": 0,
+                "goal": goal,
+                "description": description,
+                "lat": location.latitude,
+                "long": location.longitude
+              },
+              type);
+        }
       }
     }
     Navigator.of(context)

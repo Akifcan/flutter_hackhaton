@@ -31,10 +31,11 @@ user profile [ x ]
 delete comment [ x ]
 donate page [ x ]
 donate limit [ x ]
-favorites [ ]
+share [ x ]
 success [ x ]
 location [ x ]
 logout [ x ]
+bug fix [ x ]
 
 ---
 

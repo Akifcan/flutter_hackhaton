@@ -5,7 +5,6 @@ import 'package:help_together/core/string_extensions.dart';
 import 'package:help_together/dto/profile.dto.dart';
 import 'package:help_together/services/post_service.dart';
 import 'package:help_together/services/user_service.dart';
-import 'package:help_together/widgets/app_avatar.dart';
 import 'package:help_together/widgets/app_comment_card.dart';
 import 'package:help_together/widgets/app_post_card.dart';
 
@@ -17,6 +16,9 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   final UserService userService = UserService.instance;
   final PostService postService = PostService.instance;
+  int current = 0;
+  String appBarTitle = 'Paylaşımlarınız';
+  PageController pageController;
   DocumentSnapshot user;
 
   @override
@@ -26,6 +28,8 @@ class _ProfileState extends State<Profile> {
       final ProfileDto args =
           ModalRoute.of(context).settings.arguments as ProfileDto;
       user = await userService.users.doc(args.id).get();
+      pageController = PageController(initialPage: current);
+
       setState(() {});
     });
   }
@@ -47,7 +51,7 @@ class _ProfileState extends State<Profile> {
       ),
       appBar: user != null
           ? AppBar(
-              title: Text((this.user['username'] as String).capitalize,
+              title: Text((this.appBarTitle as String).capitalize,
                   style: Theme.of(context)
                       .textTheme
                       .headline5
@@ -91,6 +95,17 @@ class _ProfileState extends State<Profile> {
                             SizedBox(height: 20),
                             Expanded(
                                 child: PageView(
+                              onPageChanged: (int) {
+                                setState(() {
+                                  if (int == 0) {
+                                    appBarTitle = 'Paylaşımlarınız';
+                                  }
+                                  if (int == 1) {
+                                    appBarTitle = 'Yorumlarınız';
+                                  }
+                                });
+                              },
+                              controller: pageController,
                               children: [
                                 StreamBuilder<QuerySnapshot>(
                                   stream: postService.posts

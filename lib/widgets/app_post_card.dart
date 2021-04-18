@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_share/flutter_share.dart';
 import 'package:help_together/core/storage.dart';
 import 'package:help_together/services/post_service.dart';
+import 'package:help_together/views/detail-view/detail.dart';
 import 'package:help_together/widgets/app_post_icon.dart';
 import 'package:help_together/core/string_extensions.dart';
 
@@ -74,8 +76,21 @@ class AppPostCard extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  AppPostIcon(icon: Icons.chevron_right, detail: this.data),
-                  AppPostIcon(icon: Icons.favorite)
+                  AppPostIcon(
+                    icon: Icons.chevron_right,
+                    detail: this.data,
+                    voidCallback: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (_) => Detail(detail: this.data))),
+                  ),
+                  AppPostIcon(
+                      icon: Icons.favorite,
+                      voidCallback: () async {
+                        await FlutterShare.share(
+                          title: this.data['content']['title'],
+                          text: this.data['content']['description'],
+                        );
+                      })
                 ],
               ),
             )

@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:help_together/core/storage.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
