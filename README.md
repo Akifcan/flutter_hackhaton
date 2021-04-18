@@ -11,6 +11,6 @@
 ![6](https://i.imgur.com/4xjDxJK.png)
 ![7](https://i.imgur.com/Z9IYvZ3.png)
 ![8](https://i.imgur.com/yQQ66vp.png)
-![9](https://i.imgur.com/efBwfbn.png
+![9](https://i.imgur.com/efBwfbn.png)
 ![10](https://i.imgur.com/NaGw6K0.png)
 
