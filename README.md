@@ -2,7 +2,7 @@
 
 ### Helpy Uygulaması
 
-![video](https://www.youtube.com/watch?v=0SLXhe6MSmA)
+[video](https://www.youtube.com/watch?v=0SLXhe6MSmA)
 
 Helpy: Türkiye'nin yardımsever  uygulaması Helpy ile neler yapabilirsiniz?
 1. Herhangi bir konuda sosyal sorumluluk içeren gönüllü etkinlikler oluşturabilirsiniz.
@@ -40,3 +40,10 @@ Helpy ile el ele:)
 ## Flutter Students Club
 - Instagram [sayfamız](https://www.instagram.com/flutterstudentsclub/)
 ![fsc](https://cdn.discordapp.com/attachments/830106529813495838/830106798840086558/Calsma_Yuzeyi_2-100.jpg)
+
+## BetaClass.online
+
+- Web [sayfamız](http://www.betaclass.online/)
+
+![logo](https://cdn.discordapp.com/attachments/830106529813495838/830106621371613214/Calsma_Yuzeyi_4.png)
+![logo1](https://cdn.discordapp.com/attachments/830106529813495838/830106600315289640/Beta_Online.online.png)
