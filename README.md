@@ -44,6 +44,7 @@ Helpy ile el ele:)
 ## BetaClass.online
 
 - Web [sayfamız](http://www.betaclass.online/)
+- Youtube [kanalımız](https://www.youtube.com/channel/UCxtWuzZ1vvevGNaSwadqTPQ/videos)
 
 ![fsc](https://cdn.discordapp.com/attachments/830106529813495838/830106798840086558/Calsma_Yuzeyi_2-100.jpg)
 ![logo1](https://cdn.discordapp.com/attachments/830106529813495838/830106600315289640/Beta_Online.online.png)
