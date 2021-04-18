@@ -2,8 +2,7 @@
 
 ### Helpy Uygulaması
 
-Helpy: Türkiye'nin yardımsever bir uygulama
-Helpy ile neler yapabilirsiniz?
+Helpy: Türkiye'nin yardımsever  uygulaması Helpy ile neler yapabilirsiniz?
 1. Herhangi bir konuda sosyal sorumluluk içeren gönüllü etkinlikler oluşturabilirsiniz.
 2. Helpy'de paylaşılan gönüllü etkinliklere katılıp sosyal ilişkilerinizi kuvvetlendirebilirsiniz.
 3. Sokak hayvanları veya evcil hayvanların ihtiyaçları doğrultusunda yardım talebi oluşturabilir, bağış kampanyası düzenleyebilirsiniz.
