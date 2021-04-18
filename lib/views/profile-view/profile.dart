@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:help_together/core/string_extensions.dart';
 import 'package:help_together/dto/profile.dto.dart';
@@ -36,6 +37,14 @@ class _ProfileState extends State<Profile> {
 
     return Scaffold(
       backgroundColor: Colors.deepOrange,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.indigo,
+        child: Icon(Icons.logout),
+        onPressed: () async {
+          await FirebaseAuth.instance.signOut();
+          Navigator.of(context).pushReplacementNamed('/sign-in');
+        },
+      ),
       appBar: user != null
           ? AppBar(
               title: Text((this.user['username'] as String).capitalize,

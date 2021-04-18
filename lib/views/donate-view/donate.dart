@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:help_together/dto/donate.dto.dart';
 import 'package:help_together/core/string_extensions.dart';
+import 'package:help_together/views/post-view/post_created_successfully.dart';
 
 class Donate extends StatefulWidget {
   @override
@@ -104,12 +105,13 @@ class _DonateState extends State<Donate> {
   Widget get _donateButton => Container(
         width: double.infinity,
         child: ElevatedButton(
-          style: ElevatedButton.styleFrom(primary: Colors.deepOrange),
-          child: Padding(
-            padding: const EdgeInsets.all(18.0),
-            child: Text('Bağış Yap'),
-          ),
-          onPressed: () {},
-        ),
+            style: ElevatedButton.styleFrom(primary: Colors.deepOrange),
+            child: Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Text('Bağış Yap'),
+            ),
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (_) => PostCreatedSuccessfully(
+                    title: 'Bağışınız için teşekkürler')))),
       );
 }

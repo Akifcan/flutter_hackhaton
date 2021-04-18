@@ -32,7 +32,9 @@ delete comment [ x ]
 donate page [ x ]
 donate limit [ x ]
 favorites [ ]
-logout [ ]
+success [ x ]
+location [ x ]
+logout [ x ]
 
 ---
 

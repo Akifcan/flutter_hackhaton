@@ -5,6 +5,8 @@ import 'package:help_together/dto/donate.dto.dart';
 import 'package:help_together/dto/profile.dto.dart';
 import 'package:help_together/services/user_service.dart';
 import 'package:help_together/views/detail-view/comments.dart';
+import 'package:help_together/views/post-view/images.dart';
+import 'package:help_together/views/post-view/map_view.dart';
 import 'package:help_together/widgets/app_avatar.dart';
 import 'package:help_together/widgets/app_detail_button.dart';
 import 'package:help_together/widgets/app_detail_card.dart';
@@ -49,11 +51,19 @@ class _DetailState extends State<Detail> {
 
   Widget get _image => Expanded(
         flex: 2,
-        child: Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: NetworkImage(widget.detail['images'][0]),
-                    fit: BoxFit.cover))),
+        child: GestureDetector(
+          onTap: () => Navigator.of(context).push(MaterialPageRoute(
+              builder: (_) => Images(
+                    imageList: widget.detail['images'],
+                    lat: widget.detail['content']['lat'],
+                    long: widget.detail['content']['long'],
+                  ))),
+          child: Container(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage(widget.detail['images'][0]),
+                      fit: BoxFit.cover))),
+        ),
       );
 
   Widget get _body => Transform.translate(
@@ -181,7 +191,15 @@ class _DetailState extends State<Detail> {
                                 )),
                       ),
                     if (widget.detail['type'] != 'donate')
-                      AppDetailButton(icon: Icons.map, text: 'Konum'),
+                      AppDetailButton(
+                        icon: Icons.map,
+                        text: 'Konum',
+                        voidCallback: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (_) => MapView(
+                                    lat: widget.detail['content']['lat'],
+                                    long: widget.detail['content']['long']))),
+                      ),
                     SizedBox(width: 20),
                     AppDetailButton(
                       voidCallback: () => Navigator.of(context).push(

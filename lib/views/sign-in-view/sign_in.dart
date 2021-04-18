@@ -64,57 +64,69 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.deepOrange,
         body: Center(
             child: AnimatedBuilder(
-      animation: animationController,
-      builder: (context, value) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Transform.translate(
-              offset: Offset(0, pawUp.value),
-              child: Transform.scale(
-                  scale: pawIn.value,
-                  child: Wrap(
-                    spacing: 30,
-                    children: [
-                      Icon(FontAwesomeIcons.paw, size: 70, color: Colors.white),
-                      Icon(FontAwesomeIcons.handHolding,
-                          size: 70, color: Colors.white),
-                      Icon(FontAwesomeIcons.peopleArrows,
-                          size: 70, color: Colors.white),
-                    ],
-                  )),
-            ),
-            Opacity(
-              opacity: pawOpacity.value,
-              child: Text('El Ele',
-                  style: Theme.of(context).textTheme.headline3.copyWith(
-                      color: Colors.white, fontWeight: FontWeight.bold)),
-            ),
-            Transform.translate(
-              offset: Offset(0, buttonDown.value),
-              child: Opacity(
-                opacity: pawOpacity.value,
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        elevation: 5,
-                        primary: Colors.white,
-                        padding: const EdgeInsets.all(20)),
-                    child: Text('Google ile Giriş Yap',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline5
-                            .copyWith(color: Colors.black)),
-                    onPressed: () {
-                      print('click');
-                      signIn();
-                    }),
-              ),
-            )
-          ],
-        );
-      },
-    )));
+          animation: animationController,
+          builder: (context, value) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Transform.translate(
+                  offset: Offset(0, pawUp.value),
+                  child: Transform.scale(
+                      scale: pawIn.value,
+                      child: Wrap(
+                        spacing: 30,
+                        children: [
+                          Icon(FontAwesomeIcons.paw,
+                              size: 70, color: Colors.white),
+                          Icon(FontAwesomeIcons.handHolding,
+                              size: 70, color: Colors.white),
+                          Icon(FontAwesomeIcons.peopleArrows,
+                              size: 70, color: Colors.white),
+                        ],
+                      )),
+                ),
+                Opacity(
+                  opacity: pawOpacity.value,
+                  child: Text('ElEle',
+                      style: Theme.of(context).textTheme.headline3.copyWith(
+                          color: Colors.white, fontWeight: FontWeight.bold)),
+                ),
+                Transform.translate(
+                  offset: Offset(0, buttonDown.value),
+                  child: Opacity(
+                    opacity: pawOpacity.value,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              elevation: 15,
+                              primary: Colors.white,
+                              padding: const EdgeInsets.all(20)),
+                          child: Wrap(
+                            spacing: 10,
+                            children: [
+                              Icon(FontAwesomeIcons.google,
+                                  color: Colors.blue[900]),
+                              Text('Google ile Giriş Yap',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline5
+                                      .copyWith(color: Colors.black))
+                            ],
+                          ),
+                          onPressed: () {
+                            print('click');
+                            signIn();
+                          }),
+                    ),
+                  ),
+                )
+              ],
+            );
+          },
+        )));
   }
 }

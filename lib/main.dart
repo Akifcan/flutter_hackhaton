@@ -27,11 +27,12 @@ class MyApp extends StatelessWidget {
       theme: themeData,
       home: SignIn(),
       routes: {
+        '/sign-in': (_) => SignIn(),
         '/home': (_) => Home(),
         '/create-post': (_) => CreatePost(),
         '/change-city': (_) => ChangeCity(),
         '/profile': (_) => Profile(),
-        '/donate': (_) => Donate()
+        '/donate': (_) => Donate(),
       },
     );
   }

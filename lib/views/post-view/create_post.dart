@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:help_together/core/utils.dart';
 import 'package:help_together/services/post_service.dart';
+import 'package:help_together/views/post-view/post_created_successfully.dart';
 import 'package:help_together/widgets/app_upload_image_button.dart';
+import 'package:location/location.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 
 class CreatePost extends StatefulWidget {
@@ -46,32 +49,47 @@ class _CreatePostState extends State<CreatePost> {
     });
   }
 
-  createPost() {
+  createPost() async {
     if (type == 'pet') {
       if (petForm.currentState.validate()) {
         petForm.currentState.save();
-        postService.createPost(
-            images,
-            {
-              "title": title,
-              "description": description,
-              "gender": gender,
-              "age": age
-            },
-            type);
+        final location = await getLocation();
+        if (location is LocationData) {
+          await postService.createPost(
+              images,
+              {
+                "title": title,
+                "description": description,
+                "gender": gender,
+                "age": age,
+                "lat": location.latitude,
+                "long": location.longitude
+              },
+              type);
+        }
       }
     }
     if (type == 'volunteer') {
       if (volunteerForm.currentState.validate()) {
         volunteerForm.currentState.save();
-        postService.createPost(
-            images, {"title": title, "description": description}, type);
+        final location = await getLocation();
+        if (location is LocationData) {
+          await postService.createPost(
+              images,
+              {
+                "title": title,
+                "description": description,
+                "lat": location.latitude,
+                "long": location.longitude
+              },
+              type);
+        }
       }
     }
     if (type == 'donate') {
       if (donateForm.currentState.validate()) {
         donateForm.currentState.save();
-        postService.createPost(
+        await postService.createPost(
             images,
             {
               "title": title,
@@ -82,6 +100,8 @@ class _CreatePostState extends State<CreatePost> {
             type);
       }
     }
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (_) => PostCreatedSuccessfully()));
   }
 
   @override
