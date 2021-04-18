@@ -44,4 +44,4 @@ Helpy ile neler yapabilirsiniz?
 - Instagram [sayfamız](https://www.instagram.com/flutterstudentsclub/)
 
 ![betaclass](https://cdn.discordapp.com/attachments/830106529813495838/830106600315289640/Beta_Online.online.png)
-![fsc](https://cdn.discordapp.com/attachments/830106529813495838/830106617952862268/Calsma_Yuzeyi_2.png)
+![fsc](https://cdn.discordapp.com/attachments/830106529813495838/830106798840086558/Calsma_Yuzeyi_2-100.jpg)
