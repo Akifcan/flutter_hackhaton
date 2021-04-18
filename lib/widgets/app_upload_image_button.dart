@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:help_together/services/language_service.dart';
 
 class AppUploadImageButton extends StatelessWidget {
   final VoidCallback voidCallback;
@@ -12,7 +13,7 @@ class AppUploadImageButton extends StatelessWidget {
       width: double.infinity,
       child: InkWell(
           child: Center(
-              child: Text('Fotoğraf Yükle',
+              child: Text(LanguageService.instance.translateWord('upload'),
                   style: Theme.of(context)
                       .textTheme
                       .headline5

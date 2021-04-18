@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:help_together/core/storage.dart';
 import 'package:help_together/core/string_extensions.dart';
 import 'package:help_together/dto/profile.dto.dart';
+import 'package:help_together/services/language_service.dart';
 import 'package:help_together/services/post_service.dart';
 import 'package:help_together/services/user_service.dart';
 import 'package:help_together/widgets/app_comment_card.dart';
@@ -17,7 +19,7 @@ class _ProfileState extends State<Profile> {
   final UserService userService = UserService.instance;
   final PostService postService = PostService.instance;
   int current = 0;
-  String appBarTitle = 'Paylaşımlarınız';
+  String appBarTitle = 'posts';
   PageController pageController;
   DocumentSnapshot user;
 
@@ -51,7 +53,7 @@ class _ProfileState extends State<Profile> {
       ),
       appBar: user != null
           ? AppBar(
-              title: Text((this.appBarTitle as String).capitalize,
+              title: Text(LanguageService.instance.translateWord(appBarTitle),
                   style: Theme.of(context)
                       .textTheme
                       .headline5
@@ -64,11 +66,52 @@ class _ProfileState extends State<Profile> {
                 Expanded(
                   flex: 1,
                   child: Center(
-                      child: Container(
+                      child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
                           child: CircleAvatar(
-                    radius: 50,
-                    backgroundImage: NetworkImage(this.user['avatar']),
-                  ))),
+                        radius: 30,
+                        backgroundImage: NetworkImage(this.user['avatar']),
+                      )),
+                      SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Tooltip(
+                            message: 'Türkçe ile değiştirin',
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  primary: Colors.transparent, elevation: 0),
+                              child: Image.asset('assets/images/turkish.png'),
+                              onPressed: () {
+                                setState(() {
+                                  Storage.saveString('language', 'tr-TR');
+                                  LanguageService.instance.translate();
+                                  Navigator.of(context).pushNamed('/home');
+                                });
+                              },
+                            ),
+                          ),
+                          Tooltip(
+                            message: 'Switch to english',
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  primary: Colors.transparent, elevation: 0),
+                              child: Image.asset('assets/images/english.png'),
+                              onPressed: () {
+                                setState(() {
+                                  Storage.saveString('language', 'en-US');
+                                  LanguageService.instance.translate();
+                                  Navigator.of(context).pushNamed('/home');
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  )),
                 ),
                 Expanded(
                     flex: 3,
@@ -98,10 +141,10 @@ class _ProfileState extends State<Profile> {
                               onPageChanged: (int) {
                                 setState(() {
                                   if (int == 0) {
-                                    appBarTitle = 'Paylaşımlarınız';
+                                    appBarTitle = 'posts';
                                   }
                                   if (int == 1) {
-                                    appBarTitle = 'Yorumlarınız';
+                                    appBarTitle = 'comments';
                                   }
                                 });
                               },

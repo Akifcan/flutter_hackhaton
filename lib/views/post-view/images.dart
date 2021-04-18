@@ -10,6 +10,11 @@ class Images extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        elevation: 5,
+        child: Icon(Icons.arrow_back),
+        onPressed: () => Navigator.of(context).pop(),
+      ),
       body: PageView.builder(
         itemCount: this.imageList.length + 1,
         itemBuilder: (_, index) => index < this.imageList.length

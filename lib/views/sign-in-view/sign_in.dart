@@ -2,7 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geocoder/geocoder.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:help_together/core/utils.dart';
+import 'package:help_together/services/language_service.dart';
 import 'package:help_together/services/user_service.dart';
 import 'package:location/location.dart';
 
@@ -79,21 +81,19 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
                       child: Wrap(
                         spacing: 30,
                         children: [
-                          Icon(FontAwesomeIcons.paw,
-                              size: 70, color: Colors.white),
-                          Icon(FontAwesomeIcons.handHolding,
-                              size: 70, color: Colors.white),
-                          Icon(FontAwesomeIcons.peopleArrows,
-                              size: 70, color: Colors.white),
+                          Image.asset(
+                            'assets/images/logo.png',
+                            width: 150,
+                          )
                         ],
                       )),
                 ),
                 Opacity(
-                  opacity: pawOpacity.value,
-                  child: Text('ElEle',
-                      style: Theme.of(context).textTheme.headline3.copyWith(
-                          color: Colors.white, fontWeight: FontWeight.bold)),
-                ),
+                    opacity: pawOpacity.value,
+                    child: Text('HELPY',
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.permanentMarker(
+                            color: Colors.white, fontSize: 60))),
                 Transform.translate(
                   offset: Offset(0, buttonDown.value),
                   child: Opacity(
@@ -110,7 +110,9 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
                             children: [
                               Icon(FontAwesomeIcons.google,
                                   color: Colors.blue[900]),
-                              Text('Google ile Giriş Yap',
+                              Text(
+                                  LanguageService.instance
+                                      .translateWord('signIn'),
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline5

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:help_together/core/storage.dart';
 import 'package:help_together/core/string_extensions.dart';
+import 'package:help_together/services/language_service.dart';
 
 class LocationCard extends StatelessWidget {
   const LocationCard({Key key}) : super(key: key);
@@ -15,7 +16,7 @@ class LocationCard extends StatelessWidget {
           icon: Icon(Icons.location_on, color: Theme.of(context).primaryColor),
           onPressed: () {},
         ),
-        title: Text('Konum'),
+        title: Text(LanguageService.instance.translateWord('location')),
         subtitle: Text(
           (Storage.getString('location') as String).capitalize,
           style: Theme.of(context)

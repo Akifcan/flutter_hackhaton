@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:help_together/core/storage.dart';
 import 'package:help_together/core/string_extensions.dart';
 import 'package:help_together/dto/profile.dto.dart';
+import 'package:help_together/services/language_service.dart';
 import 'package:help_together/services/post_service.dart';
 import 'package:help_together/services/user_service.dart';
 
@@ -28,18 +29,21 @@ class _AppCommentCardState extends State<AppCommentCard> {
       return showDialog(
           context: context,
           builder: (_) => AlertDialog(
-                title: Text('Yorum Sil 🗑'),
-                content: Text('Bu yorumu silmek istediğinizden emin misiniz?'),
+                title: Text(
+                    LanguageService.instance.translateWord('deleteComment')),
+                content: Text(LanguageService.instance
+                    .translateWord('deleteCommentText')),
                 actions: [
                   ElevatedButton(
-                      child: Text('Evet Sil'),
+                      child:
+                          Text(LanguageService.instance.translateWord('yes')),
                       style: ElevatedButton.styleFrom(primary: Colors.red[900]),
                       onPressed: () {
                         postService.deleteComment(widget.comment.id);
                         Navigator.of(context).pop();
                       }),
                   ElevatedButton(
-                    child: Text('Geri Dön'),
+                    child: Text(LanguageService.instance.translateWord('no')),
                     onPressed: () => Navigator.of(context).pop(),
                   ),
                 ],
@@ -85,7 +89,7 @@ class _AppCommentCardState extends State<AppCommentCard> {
               style: Theme.of(context)
                   .textTheme
                   .subtitle1
-                  .copyWith(fontWeight: FontWeight.normal),
+                  .copyWith(fontWeight: FontWeight.normal, fontSize: 19),
             ),
           ),
         ),

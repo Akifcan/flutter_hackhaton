@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:help_together/core/storage.dart';
+import 'package:help_together/services/language_service.dart';
 
 class ChangeCity extends StatelessWidget {
   final GlobalKey<ScaffoldState> rootScaffoldMessengerKey =
@@ -13,7 +14,7 @@ class ChangeCity extends StatelessWidget {
       key: rootScaffoldMessengerKey,
       backgroundColor: Color(0xffdedede),
       appBar: AppBar(
-        title: Text('Şehir Değiştir'),
+        title: Text(LanguageService.instance.translateWord('changeCity')),
         centerTitle: true,
       ),
       body: Padding(

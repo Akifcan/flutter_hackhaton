@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:help_together/core/utils.dart';
+import 'package:help_together/services/language_service.dart';
 import 'package:help_together/services/post_service.dart';
 import 'package:help_together/views/post-view/post_created_successfully.dart';
 import 'package:help_together/widgets/app_upload_image_button.dart';
@@ -50,60 +51,69 @@ class _CreatePostState extends State<CreatePost> {
   }
 
   createPost() async {
-    if (type == 'pet') {
-      if (petForm.currentState.validate()) {
-        petForm.currentState.save();
-        final location = await getLocation();
-        if (location is LocationData) {
-          await postService.createPost(
-              images,
-              {
-                "title": title,
-                "description": description,
-                "gender": gender,
-                "age": age,
-                "lat": location.latitude,
-                "long": location.longitude
-              },
-              type);
+    if (images.length > 0) {
+      if (type == 'pet') {
+        if (petForm.currentState.validate()) {
+          petForm.currentState.save();
+          final location = await getLocation();
+          if (location is LocationData) {
+            await postService.createPost(
+                images,
+                {
+                  "title": title,
+                  "description": description,
+                  "gender": gender,
+                  "age": age,
+                  "lat": location.latitude,
+                  "long": location.longitude
+                },
+                type);
+          }
         }
       }
-    }
-    if (type == 'volunteer') {
-      if (volunteerForm.currentState.validate()) {
-        volunteerForm.currentState.save();
-        final location = await getLocation();
-        if (location is LocationData) {
-          await postService.createPost(
-              images,
-              {
-                "title": title,
-                "description": description,
-                "lat": location.latitude,
-                "long": location.longitude
-              },
-              type);
+      if (type == 'volunteer') {
+        if (volunteerForm.currentState.validate()) {
+          volunteerForm.currentState.save();
+          final location = await getLocation();
+          if (location is LocationData) {
+            await postService.createPost(
+                images,
+                {
+                  "title": title,
+                  "description": description,
+                  "lat": location.latitude,
+                  "long": location.longitude
+                },
+                type);
+          }
         }
       }
-    }
-    if (type == 'donate') {
-      if (donateForm.currentState.validate()) {
-        donateForm.currentState.save();
-        final location = await getLocation();
-        if (location is LocationData) {
-          await postService.createPost(
-              images,
-              {
-                "title": title,
-                "available": 0,
-                "goal": goal,
-                "description": description,
-                "lat": location.latitude,
-                "long": location.longitude
-              },
-              type);
+      if (type == 'donate') {
+        if (donateForm.currentState.validate()) {
+          donateForm.currentState.save();
+          final location = await getLocation();
+          if (location is LocationData) {
+            await postService.createPost(
+                images,
+                {
+                  "title": title,
+                  "available": 0,
+                  "goal": goal,
+                  "description": description,
+                  "lat": location.latitude,
+                  "long": location.longitude
+                },
+                type);
+          }
         }
       }
+    } else {
+      return showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+                title: Text('Uyarı'),
+                content: Text('Lütfen resim seçin'),
+              ));
     }
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (_) => PostCreatedSuccessfully()));
@@ -113,13 +123,14 @@ class _CreatePostState extends State<CreatePost> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+        tooltip: 'Paylaş',
         onPressed: createPost,
-        child: Icon(Icons.share),
+        child: Icon(Icons.done),
       ),
       backgroundColor: Color(0xffdedede),
       appBar: AppBar(
         elevation: 0,
-        title: Text('Paylaşım Oluşturun'),
+        title: Text(LanguageService.instance.translateWord('createPost')),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -131,8 +142,10 @@ class _CreatePostState extends State<CreatePost> {
                 onChanged: (val) => setState(() => description = val),
                 maxLength: 200,
                 maxLines: 5,
-                decoration:
-                    InputDecoration(filled: true, hintText: 'Açıklamanız'),
+                decoration: InputDecoration(
+                    filled: true,
+                    hintText:
+                        LanguageService.instance.translateWord('description')),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -145,7 +158,8 @@ class _CreatePostState extends State<CreatePost> {
                       setState(() => type = val);
                     },
                   ),
-                  Text('Hayvanlar'),
+                  Text(LanguageService.instance.translateWord('animals'),
+                      style: TextStyle(fontSize: 18)),
                   Radio(
                     value: 'volunteer',
                     groupValue: type,
@@ -154,7 +168,8 @@ class _CreatePostState extends State<CreatePost> {
                       setState(() => type = val);
                     },
                   ),
-                  Text('Gönüllülük'),
+                  Text(LanguageService.instance.translateWord('volunteering'),
+                      style: TextStyle(fontSize: 18)),
                   Radio(
                     value: 'donate',
                     groupValue: type,
@@ -163,7 +178,8 @@ class _CreatePostState extends State<CreatePost> {
                       setState(() => type = val);
                     },
                   ),
-                  Text('Bağış'),
+                  Text(LanguageService.instance.translateWord('donation'),
+                      style: TextStyle(fontSize: 18)),
                 ],
               ),
               SizedBox(height: 10),
@@ -183,7 +199,9 @@ class _CreatePostState extends State<CreatePost> {
                           }
                           return null;
                         },
-                        decoration: InputDecoration(hintText: 'Bağış Başlığı'),
+                        decoration: InputDecoration(
+                            hintText: LanguageService.instance
+                                .translateWord('title')),
                       ),
                       SizedBox(height: 10),
                       TextFormField(
@@ -217,7 +235,9 @@ class _CreatePostState extends State<CreatePost> {
                           }
                           return null;
                         },
-                        decoration: InputDecoration(hintText: 'İlan Başlığı'),
+                        decoration: InputDecoration(
+                            hintText: LanguageService.instance
+                                .translateWord('annunciation')),
                       ),
                       SizedBox(height: 10),
                     ],
@@ -239,7 +259,9 @@ class _CreatePostState extends State<CreatePost> {
                           }
                           return null;
                         },
-                        decoration: InputDecoration(hintText: 'Başlık'),
+                        decoration: InputDecoration(
+                            hintText: LanguageService.instance
+                                .translateWord('title')),
                       ),
                       SizedBox(height: 10),
                       Row(
@@ -252,7 +274,8 @@ class _CreatePostState extends State<CreatePost> {
                               setState(() => gender = val);
                             },
                           ),
-                          Text('Erkek'),
+                          Text(LanguageService.instance.translateWord('male'),
+                              style: TextStyle(fontSize: 18)),
                           Radio(
                             value: 'female',
                             groupValue: gender,
@@ -261,14 +284,17 @@ class _CreatePostState extends State<CreatePost> {
                               setState(() => gender = val);
                             },
                           ),
-                          Text('Dişi'),
+                          Text(LanguageService.instance.translateWord('female'),
+                              style: TextStyle(fontSize: 18)),
                         ],
                       ),
                       SizedBox(height: 10),
                       TextFormField(
                         onSaved: (val) => setState(() => age = int.parse(val)),
                         keyboardType: TextInputType.number,
-                        decoration: InputDecoration(hintText: 'Yaş / Tahmini'),
+                        decoration: InputDecoration(
+                            hintText: LanguageService.instance
+                                .translateWord('age/estimated')),
                       ),
                       SizedBox(height: 10),
                     ],

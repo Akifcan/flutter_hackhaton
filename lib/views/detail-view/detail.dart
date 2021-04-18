@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:help_together/dto/donate.dto.dart';
 import 'package:help_together/dto/profile.dto.dart';
+import 'package:help_together/services/language_service.dart';
 import 'package:help_together/services/user_service.dart';
 import 'package:help_together/views/detail-view/comments.dart';
 import 'package:help_together/views/post-view/images.dart';
@@ -113,10 +114,10 @@ class _DetailState extends State<Detail> {
                           crossAxisAlignment: WrapCrossAlignment.center,
                           spacing: 20,
                           children: [
-                            Text('Yaş:',
+                            Text(LanguageService.instance.translateWord('age'),
                                 style: Theme.of(context)
                                     .textTheme
-                                    .headline4
+                                    .headline5
                                     .copyWith(color: Colors.white)),
                             Text(
                               widget.detail['content']['age'].toString(),
@@ -135,7 +136,7 @@ class _DetailState extends State<Detail> {
                         spacing: 20,
                         children: [
                           Icon(FontAwesomeIcons.venusMars,
-                              size: 40, color: Colors.white),
+                              size: 30, color: Colors.white),
                           Text(
                             widget.detail['content']['gender'].toString() ==
                                     'male'
@@ -143,7 +144,7 @@ class _DetailState extends State<Detail> {
                                 : 'Dişi',
                             style: Theme.of(context)
                                 .textTheme
-                                .headline5
+                                .headline6
                                 .copyWith(color: Colors.white),
                           )
                         ],
@@ -193,7 +194,8 @@ class _DetailState extends State<Detail> {
                     if (widget.detail['type'] != 'donate')
                       AppDetailButton(
                         icon: Icons.map,
-                        text: 'Konum',
+                        text:
+                            LanguageService.instance.translateWord('location'),
                         voidCallback: () => Navigator.of(context).push(
                             MaterialPageRoute(
                                 builder: (_) => MapView(
@@ -208,7 +210,8 @@ class _DetailState extends State<Detail> {
                                   id: widget.detail.id,
                                   title: widget.detail['content']['title']))),
                       icon: Icons.comment,
-                      text: 'Yorumlar',
+                      text:
+                          LanguageService.instance.translateWord("allComments"),
                       color: Colors.red[900],
                     ),
                   ],

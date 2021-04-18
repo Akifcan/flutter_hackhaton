@@ -75,7 +75,7 @@ class _HomeState extends State<Home> {
               LocationCard(),
               SizedBox(height: 20),
               _categories,
-              SizedBox(height: 20),
+              SizedBox(height: 10),
               Expanded(
                   child: posts != null
                       ? ListView.separated(
@@ -91,7 +91,7 @@ class _HomeState extends State<Home> {
       );
 
   Widget get _categories => Container(
-        height: MediaQuery.of(context).size.height * 0.1,
+        height: MediaQuery.of(context).size.height * 0.08,
         child: ListView.separated(
           separatorBuilder: (_, __) => SizedBox(width: 20),
           itemCount: categories.length,
@@ -106,7 +106,7 @@ class _HomeState extends State<Home> {
   Widget get _fab => FloatingActionButton(
         elevation: 5,
         onPressed: () => Navigator.of(context).pushNamed('/create-post'),
-        backgroundColor: Colors.indigo,
+        backgroundColor: Colors.blueGrey[500],
         child: Wrap(
           children: [
             Icon(

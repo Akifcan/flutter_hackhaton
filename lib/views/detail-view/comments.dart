@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:help_together/services/language_service.dart';
 import 'package:help_together/services/post_service.dart';
 import 'package:help_together/widgets/app_comment_card.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
@@ -81,7 +82,7 @@ class _CommentsState extends State<Comments> {
                                       children: [
                                         IconButton(
                                             color: Colors.black,
-                                            icon: Icon(Icons.camera),
+                                            icon: Icon(Icons.image),
                                             onPressed: () {
                                               chooseImages(setState);
                                             }),
@@ -92,7 +93,8 @@ class _CommentsState extends State<Comments> {
                                         ),
                                       ],
                                     ),
-                                    hintText: 'Yorumunuz'),
+                                    hintText: LanguageService.instance
+                                        .translateWord('createComment')),
                               ),
                               SizedBox(height: 50),
                               Container(
@@ -131,7 +133,7 @@ class _CommentsState extends State<Comments> {
     return Scaffold(
       backgroundColor: Color(0xffdedede),
       floatingActionButton: FloatingActionButton.extended(
-        label: Text('Yorum Yap'),
+        label: Text(LanguageService.instance.translateWord('createComment')),
         backgroundColor: Colors.deepOrange,
         icon: Icon(Icons.comment),
         onPressed: showCommentDialog,

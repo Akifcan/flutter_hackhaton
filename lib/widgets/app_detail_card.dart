@@ -11,7 +11,7 @@ class AppDetailCard extends StatelessWidget {
         decoration: BoxDecoration(
             color: Colors.red[900], borderRadius: BorderRadius.circular(20)),
         margin: EdgeInsets.symmetric(horizontal: 10),
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(6),
         child: Center(
           child: this.text,
         ),

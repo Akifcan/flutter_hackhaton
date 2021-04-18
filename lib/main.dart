@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:help_together/core/storage.dart';
+import 'package:help_together/services/language_service.dart';
 import 'package:help_together/theme/custom_theme.dart';
 import 'package:help_together/views/change-city-view/change_city.dart';
 import 'package:help_together/views/donate-view/donate.dart';
@@ -15,6 +16,8 @@ void main() async {
   await Storage.initialStorage();
   print(Storage.getString('location'));
   // Storage.saveString('userid', 'zRLfMR7PeLhgT3JyXQ9W');
+  // Storage.saveString('language', 'en-US');
+  await LanguageService.instance.translate();
   runApp(MyApp());
 }
 
@@ -25,6 +28,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: themeData,
+      debugShowCheckedModeBanner: false,
       home: SignIn(),
       routes: {
         '/sign-in': (_) => SignIn(),
